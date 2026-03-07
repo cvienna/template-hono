@@ -9,7 +9,7 @@
     "db:generate": "pnpm drizzle-kit generate",
     "db:migrate": "pnpm drizzle-kit migrate",
     "format": "prettier --write .",
-    "tree": "tree -a -I 'node_modules|drizzle'"
+    "tree": "tree -a -I 'node_modules|drizzle|.git'"
   },
   "dependencies": {
     "@better-auth/cli": "^1.4.21",
