@@ -1,17 +1,18 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { openAPI } from "better-auth/plugins";
-
 import { db } from "./db";
-import * as authSchema from "@/features/auth/auth.schema";
+import * as authSchema from "@/schemas/auth";
+import { env } from "@/env";
 
 export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL!,
+  baseURL: env.BETTER_AUTH_URL,
   database: drizzleAdapter(db, {
-    provider: "sqlite",
+    provider: "pg",
     schema: { ...authSchema },
+    usePlural: true,
   }),
-  secret: process.env.BETTER_AUTH_SECRET!,
+  secret: env.BETTER_AUTH_SECRET,
   session: {
     expiresIn: 60 * 60 * 24 * 30,
     updateAge: 60 * 60,

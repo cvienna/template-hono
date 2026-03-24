@@ -5,14 +5,21 @@ A minimal Hono + Drizzle + Better Auth template for Node.js.
 - [Hono](https://hono.dev) — Web framework
 - [Drizzle](https://orm.drizzle.team) — ORM
 - [Better Auth](https://better-auth.com) — Authentication
-- [better-sqlite3](https://www.sqlite.org) — database
+- [PostgreSQL](https://www.postgres.com) — database
+- [Zod](https://www.zod.com) — validation
 
 ## Structure
 
 ```
 src/
-├── features/         # feature modules (routes, schemas)
 ├── lib/              # shared config (auth, db)
+├── repository/       # database helper functions
+├── routes/           # api routes
+├── schemas/          # database schemas
+├── env.ts            # environment variables utils
+├── errors.ts         # extended error class
+├── middleware.ts     # middleware functions
+├── response.ts       # api response functions
 └── index.ts          # entry point
 ```
 
@@ -27,16 +34,22 @@ pnpm install
 Set up environment variables:
 
 ```bash
-PORT=8787
-ORIGIN=http://localhost:8787
-BETTER_AUTH_SECRET=your-secret
+PORT="4060"
+
+BETTER_AUTH_URL="http://localhost:4060"
+BETTER_AUTH_SECRET="4tvpl1DwpgkuhGnchqwHLkKGi0ceAt2F"
+
+DATABASE_HOST="localhost"
+DATABASE_PORT="5432"
+DATABASE_USER="postgres"
+DATABASE_PASSWORD="postgres"
+DATABASE_NAME="template-hono_dev"
 ```
 
-Run migrations:
+Start the db:
 
 ```bash
-pnpm db:generate
-pnpm db:migrate
+pnpm db:start
 ```
 
 Start the dev server:
@@ -47,8 +60,13 @@ pnpm dev
 
 ## Scripts
 
-| Script | Description |
-|---|---|
-| `db:generate` | Generate migration files |
-| `db:migrate` | Apply migrations |
-| `auth:generate` | (Optional) Regenerate auth schema after adding better-auth plugins — move output to `src/features/auth/auth.schema.ts` |
+| Script          | Description                                                                                               |
+| --------------- | --------------------------------------------------------------------------------------------------------- |
+| `dev`           | Start the dev server                                                                                      |
+| `auth:generate` | (Optional) Regenerate auth schema after adding better-auth plugins — move output to `src/schemas/auth.ts` |
+| `db:start`      | Start the local postgres server via docker                                                                |
+| `db:stop`       | Stop the local postgres server via docker                                                                 |
+| `db:generate`   | Generate migration files                                                                                  |
+| `db:migrate`    | Apply migrations                                                                                          |
+| `format`        | Prettier code formatting                                                                                  |
+| `tree`          | Project tree (folder structure)                                                                           |

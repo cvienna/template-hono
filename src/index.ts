@@ -1,21 +1,20 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { betterAuthRoute } from "@/features/auth/auth.routes";
-import { exampleRoute } from "@/features/example/example.routes";
+import routes from "@/routes";
+import { env } from "./env";
+import { errorMiddleware } from "./middleware";
 
 const app = new Hono();
 
-
-app.route('/api', betterAuthRoute)
-
-app.route('/api', exampleRoute)
+app.route("/api", routes);
+app.onError(errorMiddleware);
 
 serve(
   {
     fetch: app.fetch,
-    port: parseInt(process.env.PORT ?? '8787'),
+    port: env.PORT,
   },
   (info) => {
-    console.log(`Server is running on ${info.port}`);
+    console.log(`Server is running on http://localhost:${info.port}`);
   },
 );
