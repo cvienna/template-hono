@@ -1,12 +1,12 @@
-A minimal Hono + Drizzle + Better Auth template for Node.js.
+A minimal Hono API template for Node.js.
 
 ## Stack
 
 - [Hono](https://hono.dev) — Web framework
 - [Drizzle](https://orm.drizzle.team) — ORM
 - [Better Auth](https://better-auth.com) — Authentication
-- [PostgreSQL](https://www.postgres.com) — database
-- [Zod](https://www.zod.com) — validation
+- [PostgreSQL](https://www.postgresql.org) — Database
+- [Zod](https://www.zod.dev) — Validation
 
 ## Structure
 
@@ -34,10 +34,10 @@ pnpm install
 Set up environment variables:
 
 ```bash
-PORT="4060"
+PORT="4000"
 
-BETTER_AUTH_URL="http://localhost:4060"
-BETTER_AUTH_SECRET="4tvpl1DwpgkuhGnchqwHLkKGi0ceAt2F"
+BETTER_AUTH_URL="http://localhost:4000"
+BETTER_AUTH_SECRET="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 DATABASE_HOST="localhost"
 DATABASE_PORT="5432"
